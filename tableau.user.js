@@ -9,5 +9,5 @@
 
 var scriptElement = document.createElement("script");
 scriptElement.type = "text/javascript";
-scriptElement.src = "https://tableau.fbmf.de/fahrzeug-tableau.user.js";
+scriptElement.src = "https://github.com/ChaosKai/fahrzeugtableau/blob/master/tableau.dev.js";
 document.body.appendChild(scriptElement);
