@@ -107,7 +107,7 @@ function sendData(data) {
         data: {
             'stationData': data
         },
-        dataType: 'jasonp',
+        dataType: 'jsonp',
         success: function(resultData) {
             // log success
             console.log("All stations have been transmitted");
