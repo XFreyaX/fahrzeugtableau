@@ -9,5 +9,5 @@
 
 var scriptElement = document.createElement("script");
 scriptElement.type = "text/javascript";
-scriptElement.src = "https://github.com/ChaosKai/fahrzeugtableau/raw/master/tableau.dev.js";
+scriptElement.src = "https://raw.githubusercontent.com/ChaosKai/fahrzeugtableau/master/tableau.dev.js";
 document.body.appendChild(scriptElement);
