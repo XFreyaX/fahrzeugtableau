@@ -103,7 +103,6 @@ function getStations() {
 function sendData(data) {
     $.ajax({
         url: 'https://tableau.fbmf.de/input.php',
-        dataType: 'JSONP',
         method: 'POST',
         crossDomain: true,
         data: {
