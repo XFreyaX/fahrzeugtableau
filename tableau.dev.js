@@ -104,7 +104,6 @@ function sendData(data) {
     $.ajax({
         url: 'https://tableau.fbmf.de/input.php',
         method: 'POST',
-        crossDomain: true,
         data: {
             'stationData': data
         },
