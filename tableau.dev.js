@@ -115,7 +115,7 @@ function sendData(data) {
             // log errors
             console.log(errorData);
         }
-    })
+    });
 }
 
 // only apply when the index page is open
@@ -131,8 +131,8 @@ if (window.location.pathname === "/" || window.location.pathname === "/#") {
             sendData({
                 userId: user_id,
                 stations: getStations()
-            })
-        }, 10000)
+            });
+        }, 10000);
     });
 
     // add a button showing the user id and link to the tableau
