@@ -132,7 +132,7 @@ if (window.location.pathname === "/" || window.location.pathname === "/#") {
                 userId: user_id,
                 stations: getStations()
             });
-        }, 10000);
+        }, 5000);
     });
 
     // add a button showing the user id and link to the tableau
