@@ -112,7 +112,7 @@ function sendData(data) {
         success: function(resultData) {
             // log success
             console.log("All stations have been transmitted");
-            $("#tableau_glyph").delay(1000).attr("class", "glyphicon glyphicon-refresh");
+            $("#tableau_glyph").delay(1000).attr("class", "glyphicon glyphicon-ok");
         },
         error: function(errorData) {
             // log errors
