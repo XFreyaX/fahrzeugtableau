@@ -140,46 +140,58 @@ function queueBuildings()
         }
     });
         
-    console.log(BuildingQueue);
-        
-    exportBuidlings();
+    sendBuilding();
+}
+
+function sendBuilding()
+{
+    $("#tableau_glyph").attr("class", "glyphicon glyphicon-upload");
+    $("#tableau_state").html('<b>Status:</b> Senden...');
+
+    var BuildingElement = BuildingQueue[0];
+    var Building = {
+            id: parseInt($(BuildingElement).find('.building_marker_image').attr('building_id'), 10),
+            name: $(BuildingElement).find('.map_position_mover').html().trim(),
+            buildingType: parseInt($(BuildingElement).attr('building_type_id'), 10),
+            vehicles: getCarsByStation(BuildingElement)
+    };
+    
+    $.ajax({
+        url: 'https://tableau.fbmf.de/ajax/import.php',
+        method: 'POST',
+        data: {
+            'building': Building
+        },
+        success: function(resultData) {
+            // log success
+            console.log("All stations have been transmitted");
+                console.log(Building);
+            $("#tableau_glyph").attr("class", "glyphicon glyphicon-ok");
+            $("#tableau_state").html('<b>Status:</b> Bereit');
+            // Aus Warteschlange entfernen
+            BuildingQueue.shift();
+        },
+        error: function(errorData) {
+            // log errors
+            console.log(errorData);
+            $("#tableau_glyph").attr("class", "glyphicon glyphicon-remove");
+            $("#tableau_state").html('<b>Status:</b> Error');
+        },
+        complete: function() {
+            // continue in queue
+            if(BuildingQueue.length > 0)
+                window.setTimeout("sendBuilding()", 250);
+        }
+    });
 }
 
 function exportBuidlings()
 {
     for (var i = 0; i < BuildingQueue.length; i++)
     {
-        $("#tableau_glyph").attr("class", "glyphicon glyphicon-upload");
-        $("#tableau_state").html('<b>Status:</b> Senden...');
-        
-        var BuildingElement = BuildingQueue[i];
-        var Building = {
-                id: parseInt($(BuildingElement).find('.building_marker_image').attr('building_id'), 10),
-                name: $(BuildingElement).find('.map_position_mover').html().trim(),
-                buildingType: parseInt($(BuildingElement).attr('building_type_id'), 10),
-                vehicles: getCarsByStation(BuildingElement)
-        };
+    
             
-        $.ajax({
-            url: 'https://tableau.fbmf.de/ajax/import.php',
-            method: 'POST',
-            data: {
-                'building': Building
-            },
-            success: function(resultData) {
-                // log success
-                console.log("All stations have been transmitted");
-                    console.log(Building);
-                $("#tableau_glyph").attr("class", "glyphicon glyphicon-ok");
-                $("#tableau_state").html('<b>Status:</b> Bereit');
-            },
-            error: function(errorData) {
-                // log errors
-                console.log(errorData);
-                $("#tableau_glyph").attr("class", "glyphicon glyphicon-remove");
-                $("#tableau_state").html('<b>Status:</b> Error');
-            }
-        });
+        
     }
 }
 
