@@ -152,15 +152,20 @@ function sendBuilding()
     var Building = {
             id: parseInt($(BuildingElement).find('.building_marker_image').attr('building_id'), 10),
             name: $(BuildingElement).find('.map_position_mover').html().trim(),
-            buildingType: parseInt($(BuildingElement).attr('building_type_id'), 10),
-            vehicles: getCarsByStation(BuildingElement)
+            type: parseInt($(BuildingElement).attr('building_type_id'), 10)
     };
     
     $.ajax({
         url: 'https://tableau.fbmf.de/ajax/import.php',
         method: 'POST',
         data: {
-            'building': Building
+            //'building_id': parseInt($(BuildingElement).find('.building_marker_image').attr('building_id'), 10),
+            //'building_name': $(BuildingElement).find('.map_position_mover').html().trim(),
+            //'building_type': parseInt($(BuildingElement).attr('building_type_id'), 10),
+            //'vehicles': getCarsByStation(BuildingElement)
+            'user_id': user_id,
+            'building': Building,
+            'vehicles': getCarsByStation(BuildingElement)
         },
         success: function(resultData) {
             // log success
