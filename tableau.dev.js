@@ -121,6 +121,63 @@ function sendData(data) {
     });
 }
 
+//
+//                  Neue Export Funktion 22.12.2016
+//
+
+// Hier werden die verbleibenden, noch zu exportierenden Gebäude gespeichert
+var BuildingQueue = [];
+
+function queueBuildings()
+{
+    $('#building_list').find('.building_list_li').each(function() {
+        // check if building should be sent
+        if (allowedBuildings[$(this).attr('building_type_id')] === true) {
+            // add station information to a temporary array
+            BuildingQueue.push($(this)});
+        }
+    });
+        
+    console.log(BuildingQueue);
+        
+    exportBuidlings();
+}
+
+function exportBuidlings()
+{
+    for (var i = 0; i < BuildingQueue.length; i++)
+    {
+        $("#tableau_glyph").attr("class", "glyphicon glyphicon-upload");
+        
+        var BuildingElement = BuildingQueue[i];
+        var Building = {
+                id: parseInt($(BuildingElement).find('.building_marker_image').attr('building_id'), 10),
+                name: $(BuildingElement).find('.map_position_mover').html().trim(),
+                buildingType: parseInt($(BuildingElement).attr('building_type_id'), 10),
+                vehicles: getCarsByStation(BuildingElement)
+        };
+            
+        $.ajax({
+            url: 'https://tableau.fbmf.de/ajax/import.php',
+            method: 'POST',
+            data: {
+                'building': Building
+            },
+            success: function(resultData) {
+                // log success
+                console.log("All stations have been transmitted");
+                    console.log(Building);
+                $("#tableau_glyph").attr("class", "glyphicon glyphicon-ok");
+            },
+            error: function(errorData) {
+                // log errors
+                console.log(errorData);
+                $("#tableau_glyph").attr("class", "glyphicon glyphicon-remove");
+            }
+        });
+    }
+}
+
 // only apply when the index page is open
 if (window.location.pathname === "/" || window.location.pathname === "/#") {
     $(document).ready(function() {
@@ -138,11 +195,15 @@ if (window.location.pathname === "/" || window.location.pathname === "/#") {
         }, 5000);
     });
 
-    // add a button showing the user id and link to the tableau
+    //
+    //                  Neues Dropdown-Menü 22.12.2016
+    //
+    
     $('#news_li').before('<li id="tableau_dropdown" class="dropdown"></li>');
     $('#tableau_dropdown').append('<a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><span id="tableau_glyph" class="glyphicon glyphicon-ok" style="margin-right: 8px; color: #FFFFFF"></span>Tableau</a>');
     $('#tableau_dropdown').append('<ul class="dropdown-menu" role="menu"></ul>');
         $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation"><a id="tableau_state"><b>Status:</b> Bereit</a></li>');
         $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation" class="divider"></li>');
         $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation"><a href="http://tableau.fbmf.de/login.php?u=' + user_id + '" target="_blank">Öffnen</a></li>');
+        $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation"><a href="#" onclick="queueBuildings()">Exportieren</a></li>');
 }
