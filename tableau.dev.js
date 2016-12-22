@@ -130,6 +130,8 @@ var BuildingQueue = [];
 
 function queueBuildings()
 {
+    $("#tableau_state").html('<b>Status:</b> Sammeln...');
+        
     $('#building_list').find('.building_list_li').each(function() {
         // check if building should be sent
         if (allowedBuildings[$(this).attr('building_type_id')] === true) {
@@ -148,6 +150,7 @@ function exportBuidlings()
     for (var i = 0; i < BuildingQueue.length; i++)
     {
         $("#tableau_glyph").attr("class", "glyphicon glyphicon-upload");
+        $("#tableau_state").html('<b>Status:</b> Senden...');
         
         var BuildingElement = BuildingQueue[i];
         var Building = {
@@ -168,11 +171,13 @@ function exportBuidlings()
                 console.log("All stations have been transmitted");
                     console.log(Building);
                 $("#tableau_glyph").attr("class", "glyphicon glyphicon-ok");
+                $("#tableau_state").html('<b>Status:</b> Bereit');
             },
             error: function(errorData) {
                 // log errors
                 console.log(errorData);
                 $("#tableau_glyph").attr("class", "glyphicon glyphicon-remove");
+                $("#tableau_state").html('<b>Status:</b> Error');
             }
         });
     }
