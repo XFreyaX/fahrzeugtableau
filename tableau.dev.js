@@ -137,5 +137,5 @@ if (window.location.pathname === "/" || window.location.pathname === "/#") {
     });
 
     // add a button showing the user id and link to the tableau
-    $('#news_li').before('<li><a href="http://tableau.fbmf.de/login.php?u=' + user_id + '" target="_blank">Tableau</a></li>');
+    $('#news_li').before('<li><a href="http://tableau.fbmf.de/login.php?u=' + user_id + '" target="_blank"><span id="tableau_glyph" class="glyphicon glyphicon-ok" style="margin-right: 8px; color: #FFFFFF"></span>Tableau</a></li>');
 }
