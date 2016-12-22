@@ -134,7 +134,7 @@ function queueBuildings()
         // check if building should be sent
         if (allowedBuildings[$(this).attr('building_type_id')] === true) {
             // add station information to a temporary array
-            BuildingQueue.push($(this)});
+            BuildingQueue.push($(this));
         }
     });
         
