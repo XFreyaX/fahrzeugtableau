@@ -112,7 +112,7 @@ function sendData(data) {
         success: function(resultData) {
             // log success
             console.log("All stations have been transmitted");
-            $("#tableau_glyph").delay(1000).attr("class", "glyphicon glyphicon-ok");
+            $("#tableau_glyph").attr("class", "glyphicon glyphicon-ok");
         },
         error: function(errorData) {
             // log errors
@@ -139,5 +139,10 @@ if (window.location.pathname === "/" || window.location.pathname === "/#") {
     });
 
     // add a button showing the user id and link to the tableau
-    $('#news_li').before('<li><a href="http://tableau.fbmf.de/login.php?u=' + user_id + '" target="_blank"><span id="tableau_glyph" class="glyphicon glyphicon-ok" style="margin-right: 8px; color: #FFFFFF"></span>Tableau</a></li>');
+    $('#news_li').before('<li id="tableau_dropdown" class="dropdown"></li>');
+    $('#tableau_dropdown').append('<a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><span id="tableau_glyph" class="glyphicon glyphicon-ok" style="margin-right: 8px; color: #FFFFFF"></span>Tableau</a>');
+    $('#tableau_dropdown').append('<ul class="dropdown-menu" role="menu"></ul>');
+        $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation"><a id="tableau_state"><b>Status:</b> Bereit</a></li>');
+        $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation" class="divider"></li>');
+        $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation"><a href="http://tableau.fbmf.de/login.php?u=' + user_id + '" target="_blank">Öffnen</a></li>');
 }
