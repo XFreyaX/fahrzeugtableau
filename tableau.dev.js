@@ -102,6 +102,7 @@ function getStations() {
 
 // sends the given data via POST request to the tableau
 function sendData(data) {
+    $("#tableau_glyph").attr("class", "glyphicon glyphicon-refresh");
     $.ajax({
         url: 'https://tableau.fbmf.de/input.php',
         method: 'POST',
@@ -111,6 +112,7 @@ function sendData(data) {
         success: function(resultData) {
             // log success
             console.log("All stations have been transmitted");
+            $("#tableau_glyph").delay(1000).attr("class", "glyphicon glyphicon-refresh");
         },
         error: function(errorData) {
             // log errors
