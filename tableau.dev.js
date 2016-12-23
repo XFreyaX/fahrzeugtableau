@@ -87,19 +87,14 @@ var ExportQueue = [];
 var ExportState = "inactive";
 
 //
-//                  Hauptfunktion zum exportieren der Gebäude
+//                  ##### Export Manager #####
 //
-
-function ExportStart()
-{
-    ExportState = "active";
-}
 
 function ExportAll()
 {
     switch(ExportState)
     {
-        case "active":
+        case "start":
             // set user feedback
             $("#tableau_state").html('<b>Status:</b> Sammeln...');
             $("#tableau_glyph").attr("class", "glyphicon glyphicon-search");
@@ -126,16 +121,8 @@ function ExportAll()
             break;
     
         case "sending":
-            if (ExportQueue.length > 0)
-            {
-                //setTimeout(ExportAll(), 500);
-            }
-            else
-            {
-                // set new state
+            if (ExportQueue.length === 0)
                 ExportState = "sent";
-                //setTimeout(ExportAll(), 500);
-            }
             break;
     
         case "sent":
@@ -145,11 +132,19 @@ function ExportAll()
 
             // set new state
             ExportState = "inactive";
-            //setTimeout(ExportAll(), 1500);
             break;
         default:
             ExportState = "inactive";
     }
+}
+
+//
+//                  Export starten
+//
+
+function ExportStart()
+{
+    ExportState = "start";
 }
 
 //
