@@ -184,10 +184,7 @@ function Export_SendBuildings()
         },
         success: function(resultData) {
             // log success
-            console.log("All stations have been transmitted");
-                console.log(Building);
-            $("#tableau_glyph").attr("class", "glyphicon glyphicon-ok");
-            $("#tableau_state").html('<b>Status:</b> Bereit');
+            console.log("sent building " + Building.id);
             // Aus Warteschlange entfernen
             ExportQueue.shift();
         },
