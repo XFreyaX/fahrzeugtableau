@@ -214,7 +214,7 @@ if (window.location.pathname === "/" || window.location.pathname === "/#") {
             stations: getStations()
         });
         
-        ExportAll();
+        //ExportAll();
         
         // create interval to send all the data
         window.setInterval(function() {
