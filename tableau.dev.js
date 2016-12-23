@@ -104,7 +104,8 @@ function ExportAll()
 
             // set new state
             ExportState = "collected";
-            window.setTimeout("ExportAll()", 250);
+            setTimeout(ExportAll(), 250);
+            break;
     
         case "collected":
             // set user feedback
@@ -116,19 +117,21 @@ function ExportAll()
 
             // set new state
             ExportState = "sending";
-            window.setTimeout("ExportAll()", 250);
+            setTimeout(ExportAll(), 250);
+            break;
     
         case "sending":
             if (ExportQueue.length == 0)
             {
                 // set new state
                 ExportState = "sent";
-                window.setTimeout("ExportAll()", 250);
+                setTimeout(ExportAll(), 250);
             }
             else
             {
-                window.setTimeout("ExportAll()", 250);
+                setTimeout(ExportAll(), 250);
             }
+            break;
     
         case "sent":
             // set user feedback
@@ -137,7 +140,10 @@ function ExportAll()
 
             // set new state
             ExportState = "inactive";
-            window.setTimeout("ExportAll()", 1500);
+            setTimeout(ExportAll(), 1500);
+            break;
+        default:
+            ExportState = "inactive";
     }
 }
 
@@ -197,7 +203,7 @@ function Export_SendBuildings()
         complete: function() {
             // continue in queue
             if(ExportQueue.length > 0)
-                window.setTimeout("Export_SendBuildings()", 250);
+                setTimeout(Export_SendBuildings(), 250);
         }
     });
 }
