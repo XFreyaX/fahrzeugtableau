@@ -15,51 +15,6 @@ var allowedBuildings = {
         13: true,    // police helicopter
         14: false,   // Bereitstellungsraum
         15: true     // Wasserrettung
-    },
-
-    // data is sent like thisd
-    exampleData      = {
-        userId: 4156156,
-        stations: [
-            {
-                id: '1234',
-                name: 'Testname 1',
-                stationType: 0,
-                cars: [
-                    {
-                        id: '4321',
-                        carType: 15,
-                        name: 'Testauto 1',
-                        status: 2
-                    },
-                    {
-                        id: '4322',
-                        carType: 10,
-                        name: 'Testauto 2',
-                        status: 5
-                    }
-                ]
-            },
-            {
-                id: '1235',
-                name: 'Testname 2',
-                stationType: 8,
-                cars: [
-                    {
-                        id: '4323',
-                        carType: 15,
-                        name: 'Testauto 3',
-                        status: 2
-                    },
-                    {
-                        id: '4324',
-                        carType: 17,
-                        name: 'Testauto 4',
-                        status: 5
-                    }
-                ]
-            }
-        ]
     };
 
 // returns the cars of the given station as a JSON Array
@@ -121,17 +76,78 @@ function sendData(data) {
     });
 }
 
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 //
 //                  Neue Export Funktion 22.12.2016
 //
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 // Hier werden die verbleibenden, noch zu exportierenden Gebäude gespeichert
-var BuildingQueue = [];
+var ExportQueue = [];
+var ExportState = "inactive";
 
-function queueBuildings()
+//
+//                  Hauptfunktion zum exportieren der Gebäude
+//
+
+function ExportAll()
 {
-    $("#tableau_state").html('<b>Status:</b> Sammeln...');
-        
+    switch(ExportState)
+    {
+        case "inactive":
+            // set user feedback
+            $("#tableau_state").html('<b>Status:</b> Sammeln...');
+            $("#tableau_glyph").attr("class", "glyphicon glyphicon-search");
+
+            // collect buildings
+            Export_CollectBuildings();
+
+            // set new state
+            ExportState = "collected";
+            window.setTimeout("ExportAll()", 250);
+    
+        case "collected":
+            // set user feedback
+            $("#tableau_state").html('<b>Status:</b> Senden...');
+            $("#tableau_glyph").attr("class", "glyphicon glyphicon-upload");
+
+            // send buildings
+            Export_SendBuildings();
+
+            // set new state
+            ExportState = "sending";
+            window.setTimeout("ExportAll()", 250);
+    
+        case "sending":
+            if (BuildingQueue.length == 0)
+            {
+                // set new state
+                ExportState = "sent";
+                window.setTimeout("ExportAll()", 250);
+            }
+            else
+            {
+                window.setTimeout("ExportAll()", 250);
+            }
+    
+        case "sent":
+            // set user feedback
+            $("#tableau_state").html('<b>Status:</b> Gesendet');
+            $("#tableau_glyph").attr("class", "glyphicon glyphicon-ok");
+
+            // set new state
+            ExportState = "inactive";
+            window.setTimeout("ExportAll()", 1500);
+    }
+}
+
+//
+//                  Gebäude aus dem Spiel importieren
+//
+
+function Export_CollectBuildings()
+{
+    // collect buildings
     $('#building_list').find('.building_list_li').each(function() {
         // check if building should be sent
         if (allowedBuildings[$(this).attr('building_type_id')] === true) {
@@ -139,15 +155,14 @@ function queueBuildings()
             BuildingQueue.push($(this));
         }
     });
-        
-    sendBuilding();
 }
 
-function sendBuilding()
-{
-    $("#tableau_glyph").attr("class", "glyphicon glyphicon-upload");
-    $("#tableau_state").html('<b>Status:</b> Senden...');
+//
+//                  Gebäude an Tableau senden
+//
 
+function Export_SendBuildings()
+{
     var BuildingElement = BuildingQueue[0];
     var Building = {
             id: parseInt($(BuildingElement).find('.building_marker_image').attr('building_id'), 10),
@@ -185,19 +200,9 @@ function sendBuilding()
         complete: function() {
             // continue in queue
             if(BuildingQueue.length > 0)
-                window.setTimeout("sendBuilding()", 250);
+                window.setTimeout("Export_SendBuildings()", 250);
         }
     });
-}
-
-function exportBuidlings()
-{
-    for (var i = 0; i < BuildingQueue.length; i++)
-    {
-    
-            
-        
-    }
 }
 
 // only apply when the index page is open
@@ -208,6 +213,9 @@ if (window.location.pathname === "/" || window.location.pathname === "/#") {
             userId: user_id,
             stations: getStations()
         });
+        
+        ExportAll();
+        
         // create interval to send all the data
         window.setInterval(function() {
             sendData({
