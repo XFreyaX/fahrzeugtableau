@@ -189,7 +189,7 @@ function Export_SendBuildings()
             $("#tableau_glyph").attr("class", "glyphicon glyphicon-ok");
             $("#tableau_state").html('<b>Status:</b> Bereit');
             // Aus Warteschlange entfernen
-            BuildingQueue.shift();
+            ExportQueue.shift();
         },
         error: function(errorData) {
             // log errors
