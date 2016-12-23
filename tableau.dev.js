@@ -104,7 +104,7 @@ function ExportAll()
 
             // set new state
             ExportState = "collected";
-            setTimeout(ExportAll(), 250);
+            //setTimeout(ExportAll(), 250);
             break;
     
         case "collected":
@@ -117,19 +117,19 @@ function ExportAll()
 
             // set new state
             ExportState = "sending";
-            setTimeout(ExportAll(), 250);
+            //setTimeout(ExportAll(), 250);
             break;
     
         case "sending":
             if (ExportQueue.length > 0)
             {
-                setTimeout(ExportAll(), 500);
+                //setTimeout(ExportAll(), 500);
             }
             else
             {
                 // set new state
                 ExportState = "sent";
-                setTimeout(ExportAll(), 500);
+                //setTimeout(ExportAll(), 500);
             }
             break;
     
@@ -140,7 +140,7 @@ function ExportAll()
 
             // set new state
             ExportState = "inactive";
-            setTimeout(ExportAll(), 1500);
+            //setTimeout(ExportAll(), 1500);
             break;
         default:
             ExportState = "inactive";
@@ -218,6 +218,7 @@ if (window.location.pathname === "/" || window.location.pathname === "/#") {
         });
         
         //ExportAll();
+            setInterval(ExportAll, 500);
         
         // create interval to send all the data
         window.setInterval(function() {
