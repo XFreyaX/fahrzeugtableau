@@ -119,7 +119,7 @@ function ExportAll()
             window.setTimeout("ExportAll()", 250);
     
         case "sending":
-            if (BuildingQueue.length == 0)
+            if (ExportQueue.length == 0)
             {
                 // set new state
                 ExportState = "sent";
@@ -152,7 +152,7 @@ function Export_CollectBuildings()
         // check if building should be sent
         if (allowedBuildings[$(this).attr('building_type_id')] === true) {
             // add station information to a temporary array
-            BuildingQueue.push($(this));
+            ExportQueue.push($(this));
         }
     });
 }
@@ -163,7 +163,7 @@ function Export_CollectBuildings()
 
 function Export_SendBuildings()
 {
-    var BuildingElement = BuildingQueue[0];
+    var BuildingElement = ExportQueue[0];
     var Building = {
             id: parseInt($(BuildingElement).find('.building_marker_image').attr('building_id'), 10),
             name: $(BuildingElement).find('.map_position_mover').html().trim(),
@@ -199,7 +199,7 @@ function Export_SendBuildings()
         },
         complete: function() {
             // continue in queue
-            if(BuildingQueue.length > 0)
+            if(ExportQueue.length > 0)
                 window.setTimeout("Export_SendBuildings()", 250);
         }
     });
