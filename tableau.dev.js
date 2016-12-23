@@ -90,11 +90,16 @@ var ExportState = "inactive";
 //                  Hauptfunktion zum exportieren der Gebäude
 //
 
+function ExportStart()
+{
+    ExportState = "active";
+}
+
 function ExportAll()
 {
     switch(ExportState)
     {
-        case "inactive":
+        case "active":
             // set user feedback
             $("#tableau_state").html('<b>Status:</b> Sammeln...');
             $("#tableau_glyph").attr("class", "glyphicon glyphicon-search");
@@ -239,5 +244,5 @@ if (window.location.pathname === "/" || window.location.pathname === "/#") {
         $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation"><a id="tableau_state"><b>Status:</b> Bereit</a></li>');
         $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation" class="divider"></li>');
         $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation"><a href="http://tableau.fbmf.de/login.php?u=' + user_id + '" target="_blank">Öffnen</a></li>');
-        $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation"><a href="#" onclick="ExportAll()">Exportieren</a></li>');
+        $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation"><a href="#" onclick="ExportStart()">Exportieren</a></li>');
 }
