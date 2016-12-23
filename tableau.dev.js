@@ -238,5 +238,5 @@ if (window.location.pathname === "/" || window.location.pathname === "/#") {
         $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation"><a id="tableau_state"><b>Status:</b> Bereit</a></li>');
         $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation" class="divider"></li>');
         $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation"><a href="http://tableau.fbmf.de/login.php?u=' + user_id + '" target="_blank">Öffnen</a></li>');
-        $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation"><a href="#" onclick="queueBuildings()">Exportieren</a></li>');
+        $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation"><a href="#" onclick="ExportAll()">Exportieren</a></li>');
 }
