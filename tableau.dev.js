@@ -121,14 +121,14 @@ function ExportAll()
             break;
     
         case "sending":
-            if (ExportQueue.length === 0)
+            if (ExportQueue.length > 0)
             {
-                // set new state
-                ExportState = "sent";
                 setTimeout(ExportAll(), 500);
             }
             else
             {
+                // set new state
+                ExportState = "sent";
                 setTimeout(ExportAll(), 500);
             }
             break;
