@@ -380,6 +380,7 @@ if (window.location.pathname === "/" || window.location.pathname === "/#") {
         
         //ExportAll();
             setInterval(ExportAll, 500);
+            setInterval(UpdateVehicles, 500);
         
         // create interval to send all the data
         //window.setInterval(function() {
