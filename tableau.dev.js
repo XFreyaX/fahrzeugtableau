@@ -78,13 +78,172 @@ function sendData(data) {
 
 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 //
-//                  Neue Export Funktion 22.12.2016
+//                  Neue UPDATE Funktion 24.12.2016
+//
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+// Hier werden die sichbaren Fahrzeuge gespeichert
+var UpdateQueue = [];
+var UpdateState = "idle";
+
+//
+//                  ##### Export Manager #####
+//
+
+function UpdateVehicles()
+{
+    // prioritize ExportAll
+    if(ExportState != "idle")
+    {
+        UpdateState = "idle";
+        return;
+    }
+    
+    switch(UpdateState)
+    {
+        case "start":
+            // set user feedback
+            $("#tableau_state").html('<b>Status:</b> Sichtbare Fahrzeuge abrufen...');
+            $("#tableau_glyph").attr("class", "glyphicon glyphicon-download");
+
+            // collect buildings
+            Update_GetVisibleVehicles();
+
+            // set new state
+            UpdateState = "fetching";
+            break;
+            
+        case "fetched":
+            // set user feedback
+            $("#tableau_state").html('<b>Status:</b> Fahrzeugdaten sammeln...');
+            $("#tableau_glyph").attr("class", "glyphicon glyphicon-search");
+
+            // collect buildings
+            Update_CollectVehicles();
+
+            // set new state
+            UpdateState = "collecting";
+            break;
+            
+        case "collected":
+            // set user feedback
+            $("#tableau_state").html('<b>Status:</b> Fahrzeuge senden...');
+            $("#tableau_glyph").attr("class", "glyphicon glyphicon-upload");
+
+            // collect buildings
+            Update_SendVehicles();
+            
+            break;
+            
+        case "sent":
+            // set user feedback
+            $("#tableau_state").html('<b>Status:</b> Fahrzeuge gesendet');
+            $("#tableau_glyph").attr("class", "glyphicon glyphicon-ok");
+
+            // set new state
+            UpdateState = "idle";
+            break;
+            
+        default:
+            UpdateState = "idle";
+    }
+}
+
+//
+//                  Update starten
+//
+
+function Update_Start()
+{
+    UpdateState = "start";
+}
+
+//
+//                  Sichtbare Fahrzeuge vom Tableau abrufen
+//
+
+function Update_GetVisibleVehicles()
+{
+    //  reset queue
+    UpdateQueue = [];
+    
+    //  get visible vehicles
+    $.ajax({
+        url: 'https://tableau.fbmf.de/ajax/export.php',
+        method: 'POST',
+        data: {
+            'user_id': user_id,
+            'action': 'get_visible_vehicles'
+        },
+        success: function(resultData) {
+            // 
+            UpdateQueue = JSON.parse(resultData);
+            // log success
+            console.log("get " + UpdateQueue.vehicles.length + " visible vehicles");
+            // trigger update manager
+            UpdateState = "fetched";
+        },
+        error: function(errorData) {
+            // log errors
+            console.log(errorData);
+            $("#tableau_glyph").attr("class", "glyphicon glyphicon-remove");
+            $("#tableau_state").html('<b>Status:</b> Error');
+            // trigger update manager
+            UpdateState = "error";
+        }
+    });
+}
+
+function Update_CollectVehicles()
+{
+    //  get visible vehicles
+    for (var i = 0; i < UpdateQueue.vehicles.length; i++)
+    {
+        var Vehicle = $("#vehicle_list_" + UpdateQueue.vehicles[i].id);
+        UpdateQueue.vehicles[i].status = parseInt($(Vehicle).find('.building_list_fms').html().trim(), 10);
+    }
+    
+    UpdateState = "collected";
+}
+
+function Update_SendVehicles()
+{
+    $.ajax({
+        url: 'https://tableau.fbmf.de/ajax/import.php',
+        method: 'POST',
+        data: {
+            'user_id': user_id,
+            'action': 'update_vehicles',
+            'vehicles': UpdateQueue.vehicles
+        },
+        success: function(resultData) {
+            // log success
+            console.log("sent " + UpdateQueue.vehicles.length + " vehicles with update");
+            // trigger update manager
+            UpdateState = "sent";
+        },
+        error: function(errorData) {
+            // log errors
+            console.log(errorData);
+            $("#tableau_glyph").attr("class", "glyphicon glyphicon-remove");
+            $("#tableau_state").html('<b>Status:</b> Update Error');
+        },
+        complete: function() {
+            // Warteschlange leeren
+            UpdateQueue = [];
+        }
+    });
+}
+
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+//
+//                  Neue EXPORT Funktion 22.12.2016
 //
 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 // Hier werden die verbleibenden, noch zu exportierenden Gebäude gespeichert
 var ExportQueue = [];
-var ExportState = "inactive";
+var ExportState = "idle";
 
 //
 //                  ##### Export Manager #####
@@ -131,10 +290,11 @@ function ExportAll()
             $("#tableau_glyph").attr("class", "glyphicon glyphicon-ok");
 
             // set new state
-            ExportState = "inactive";
+            ExportState = "idle";
             break;
+            
         default:
-            ExportState = "inactive";
+            ExportState = "idle";
     }
 }
 
@@ -142,7 +302,7 @@ function ExportAll()
 //                  Export starten
 //
 
-function ExportStart()
+function Export_Start()
 {
     ExportState = "start";
 }
@@ -185,6 +345,7 @@ function Export_SendBuildings()
             //'building_type': parseInt($(BuildingElement).attr('building_type_id'), 10),
             //'vehicles': getCarsByStation(BuildingElement)
             'user_id': user_id,
+            'action': 'export_buildings',
             'building': Building,
             'vehicles': getCarsByStation(BuildingElement)
         },
@@ -198,7 +359,7 @@ function Export_SendBuildings()
             // log errors
             console.log(errorData);
             $("#tableau_glyph").attr("class", "glyphicon glyphicon-remove");
-            $("#tableau_state").html('<b>Status:</b> Error');
+            $("#tableau_state").html('<b>Status:</b> Export Error');
         },
         complete: function() {
             // continue in queue
@@ -239,5 +400,5 @@ if (window.location.pathname === "/" || window.location.pathname === "/#") {
         $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation"><a id="tableau_state"><b>Status:</b> Bereit</a></li>');
         $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation" class="divider"></li>');
         $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation"><a href="http://tableau.fbmf.de/login.php?u=' + user_id + '" target="_blank">Öffnen</a></li>');
-        $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation"><a href="#" onclick="ExportStart()">Exportieren</a></li>');
+        $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation"><a href="#" onclick="Export_Start()">Exportieren</a></li>');
 }
