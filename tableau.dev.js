@@ -373,21 +373,21 @@ function Export_SendBuildings()
 if (window.location.pathname === "/" || window.location.pathname === "/#") {
     $(document).ready(function() {
         // execute function
-        sendData({
-            userId: user_id,
-            stations: getStations()
-        });
+        //sendData({
+        //    userId: user_id,
+        //    stations: getStations()
+        //});
         
         //ExportAll();
             setInterval(ExportAll, 500);
         
         // create interval to send all the data
-        window.setInterval(function() {
-            sendData({
-                userId: user_id,
-                stations: getStations()
-            });
-        }, 5000);
+        //window.setInterval(function() {
+        //    sendData({
+        //        userId: user_id,
+        //        stations: getStations()
+        //    });
+        //}, 5000);
     });
 
     //
