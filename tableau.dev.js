@@ -106,11 +106,11 @@ function UpdateVehicles()
             $("#tableau_state").html('<b>Status:</b> Sichtbare Fahrzeuge abrufen...');
             $("#tableau_glyph").attr("class", "glyphicon glyphicon-download");
 
-            // collect buildings
-            Update_GetVisibleVehicles();
-
             // set new state
             UpdateState = "fetching";
+
+            // call function
+            Update_GetVisibleVehicles();
             break;
             
         case "fetched":
@@ -118,11 +118,11 @@ function UpdateVehicles()
             $("#tableau_state").html('<b>Status:</b> Fahrzeugdaten sammeln...');
             $("#tableau_glyph").attr("class", "glyphicon glyphicon-search");
 
-            // collect buildings
-            Update_CollectVehicles();
-
             // set new state
             UpdateState = "collecting";
+
+            // call function
+            Update_CollectVehicles();
             break;
             
         case "collected":
@@ -130,7 +130,7 @@ function UpdateVehicles()
             $("#tableau_state").html('<b>Status:</b> Fahrzeuge senden...');
             $("#tableau_glyph").attr("class", "glyphicon glyphicon-upload");
 
-            // collect buildings
+            // call function
             Update_SendVehicles();
             
             break;
