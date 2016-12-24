@@ -130,6 +130,9 @@ function UpdateVehicles()
             $("#tableau_state").html('<b>Status:</b> Fahrzeuge senden...');
             $("#tableau_glyph").attr("class", "glyphicon glyphicon-upload");
 
+            // set new state
+            UpdateState = "sending";
+
             // call function
             Update_SendVehicles();
             
@@ -220,8 +223,6 @@ function Update_SendVehicles()
         success: function(resultData) {
             // log success
             console.log("sent " + UpdateQueue.vehicles.length + " vehicles with update");
-            // Warteschlange leeren
-            UpdateQueue = [];
             // trigger update manager
             UpdateState = "sent";
         },
@@ -230,6 +231,10 @@ function Update_SendVehicles()
             console.log(errorData);
             $("#tableau_glyph").attr("class", "glyphicon glyphicon-remove");
             $("#tableau_state").html('<b>Status:</b> Update Error');
+        },
+        complete: function() {
+            // empty queue
+            UpdateQueue = [];
         }
     });
 }
