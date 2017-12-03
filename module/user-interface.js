@@ -42,30 +42,46 @@ function createNavbarItem()
 function createExportModal()
 {
     $("body").append('<div id="tableau-export-modal"></div>');
-                     
-    $("#tableau-export-modal").append('<div id="tableau-export-modal-content"></div>');
     $("#tableau-export-modal").css(
     {
         "width":                "100%",
         "height":               "100%",
+        "padding":              "0",
+        "margin":               "0",
         "display":              "none",
         "position":             "fixed",
         "top":                  "0",
         "left":                 "0",
         "right":                "0",
         "background":           "rgba(250,250,250,0.64)"
-    });
-
-    $("#tableau-export-modal-content").append('<div id="tableau-export-modal-content"></div>');
+    }); 
+    
+    $("#tableau-export-modal").append('<div id="tableau-export-modal-content"></div>');
     $("#tableau-export-modal-content").css(
     {
         "width":                "80%",
         "max-width":            "320px",
+        "padding":              "0",
+        "margin":               "0",
         "overflow":             "hidden",
         "display":              "flex",
+        "flex-flow":            "column nowrap",
         "justify-content":      "center",
         "align-items":          "center",
         "background":           "rgba(250,250,250,1)",
         "border-radius":        "4px"
     });
+
+    $("#tableau-export-modal-content").append('<header>Gebäude- und Fahrzeugexport</header>');
+    $("#tableau-export-modal-content").find("header").css(
+    {
+        "width":                "100%",
+        "padding":              "16px 32px",
+        "margin":               "0",
+        "display":              "flex",
+        "justify-content":      "flex-start",
+        "align-items":          "center",
+    });
+
+    $("#tableau-export-modal-content").append('<section></section>');
 }
