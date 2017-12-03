@@ -10,19 +10,8 @@ if (window.location.pathname === "/" || window.location.pathname === "/#")
             return;
         }*/
 
-        // get User-ID for global application
-        localStorage.setItem('tableau-user-id', user_id);
-
-        if (localStorage.getItem("tableau-building-list") === null)
-        {
-            console.log("Keine Gebäudeliste vorhanden");
-            collectBuildings();
-        }
-        else
-        {
-            console.log("Gebäudeliste vorhanden");
-            collectBuildings();
-        }
+        createNavbarItem();
+        createExportModal();
     });
 }
 
