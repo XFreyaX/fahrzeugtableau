@@ -42,6 +42,7 @@ function createExportModal()
         "top":                  "0",
         "left":                 "0",
         "right":                "0",
+        "z-index":              "1000",
         "background":           "rgba(250,250,250,0.64)"
     }); 
     
