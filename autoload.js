@@ -11,7 +11,7 @@
 
         var scriptElement = document.createElement("script");
         scriptElement.type = "text/javascript";
-        scriptElement.src = "https://rawgit.com/ChaosKai/fahrzeugtableau/master/module-ui.js";
+        scriptElement.src = "https://rawgit.com/ChaosKai/fahrzeugtableau/master/module/user-interface.js";
         document.body.appendChild(scriptElement);
 
 //      -
@@ -20,7 +20,7 @@
 
         var scriptElement = document.createElement("script");
         scriptElement.type = "text/javascript";
-        scriptElement.src = "https://rawgit.com/ChaosKai/fahrzeugtableau/master/module-export.js";
+        scriptElement.src = "https://rawgit.com/ChaosKai/fahrzeugtableau/master/module/export.js";
         document.body.appendChild(scriptElement);
 
 //      -
@@ -29,5 +29,5 @@
 
         var scriptElement = document.createElement("script");
         scriptElement.type = "text/javascript";
-        scriptElement.src = "https://rawgit.com/ChaosKai/fahrzeugtableau/master/module-update.js";
+        scriptElement.src = "https://rawgit.com/ChaosKai/fahrzeugtableau/master/module/update.js";
         document.body.appendChild(scriptElement);
