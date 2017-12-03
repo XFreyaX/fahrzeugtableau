@@ -41,9 +41,9 @@ function createNavbarItem()
 
 function createExportModal()
 {
-    $("body").append('<div id="tableau-export-modal'></div>);
+    $("body").append('<div id="tableau-export-modal"></div>');
                      
-    $("#tableau-export-modal").append('<div id="tableau-export-modal-content></div>');
+    $("#tableau-export-modal").append('<div id="tableau-export-modal-content"></div>');
     $("#tableau-export-modal").css(
     {
         "width":                "100%",
@@ -56,7 +56,7 @@ function createExportModal()
         "background":           "rgba(250,250,250,0.64)"
     });
 
-    $("#tableau-export-modal-content").append('<div id="tableau-export-modal-content></div>');
+    $("#tableau-export-modal-content").append('<div id="tableau-export-modal-content"></div>');
     $("#tableau-export-modal-content").css(
     {
         "width":                "80%",
