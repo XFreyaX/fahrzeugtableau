@@ -83,7 +83,8 @@ function createExportModal()
         "align-items":          "center",
         "font-size":            "2rem",
         "font-weight":          "300",
-        "border-bottom":        "1px solid #c2c2c2"
+        "border-bottom":        "1px solid #c2c2c2",
+        "background":           "#bf360c"
     });
 
     $("#tableau-export-modal-content").append('<section id="tableau-export-modal-buildings"></section>');
@@ -161,5 +162,18 @@ function createExportModal()
             "align-items":          "center",
             "font-size":            "12px"
         });
+    });
+    
+    $("#tableau-export-modal-content").append('<footer>Gebäude- und Fahrzeugexport</footer>');
+    $("#tableau-export-modal-content").find("footer").css(
+    {
+        "width":                "100%",
+        "padding":              "16px 32px",
+        "margin":               "0",
+        "display":              "flex",
+        "justify-content":      "flex-start",
+        "align-items":          "center",
+        "font-size":            "16px",
+        "border-top":           "1px solid #c2c2c2"
     });
 }
