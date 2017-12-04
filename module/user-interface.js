@@ -29,7 +29,7 @@ function createNavbarItem()
         $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation"><a id="tableau_state"><b>Status:</b> Bereit</a></li>');
         $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation" class="divider"></li>');
         $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation"><a href="http://tableau.eagledev.de/login.php?u=' + user_id + '" target="_blank">Öffnen</a></li>');
-        $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation"><a href="#" onclick="Export_Start()">Exportieren</a></li>');
+        $('#tableau_dropdown').find(".dropdown-menu").append('<li role="presentation"><a href="#" onclick="exportBuildingsAndVehicles()">Exportieren</a></li>');
 }
 
 
