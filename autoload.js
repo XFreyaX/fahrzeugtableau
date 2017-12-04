@@ -6,6 +6,15 @@
 //  -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 //      -
+//      -           Seppels Kill-Switch
+//      -
+
+        if( typeof killSwitchTableau !== "undefined" )
+        {
+            return;
+        }
+
+//      -
 //      -           UI-Creator
 //      -
 
