@@ -13,14 +13,10 @@ if (window.location.pathname === "/" || window.location.pathname === "/#")
 {
     $(document).ready(function()
     {
-        //  KillSwitch wie von Sebastian gewünscht
-        /*if( typeof(killSwitchTableau) != "undefinded" )
-        {
-            return;
-        }*/
-
         createNavbarItem();
         createExportModal();
+        
+        console.log("Fahrzeugtableau UI geladen");
     });
 }
 
