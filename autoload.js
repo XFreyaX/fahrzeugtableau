@@ -12,7 +12,7 @@
         if( typeof killSwitchTableau !== "undefined" )
         {
             console.log("Fahrzeugtableau durch Sebastian gesperrt!");
-            return;
+            return false;
         }
 
 //      -
