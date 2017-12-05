@@ -175,4 +175,6 @@ function createExportModal()
         "font-size":            "16px",
         "border-top":           "1px solid #c2c2c2"
     });
+    
+    $("#tableau-export-modal-content").find("footer").append('<a id="tableau-export-modal-button-close" class="btn btn-success">Fertig</a>');
 }
