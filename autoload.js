@@ -21,8 +21,7 @@
 
             var scriptElement = document.createElement("script");
             scriptElement.type = "text/javascript";
-            //scriptElement.src = "https://rawgit.com/ChaosKai/fahrzeugtableau/master/module/user-interface.js";
-            scriptElement.src = "https://tableau.eagledev.de/lss-bridge/user-interface.js";
+            scriptElement.src = "https://tableau.eagledev.de/userscript/interface.js";
             document.body.appendChild(scriptElement);
 
 //          -
@@ -31,8 +30,7 @@
 
             var scriptElement = document.createElement("script");
             scriptElement.type = "text/javascript";
-            //scriptElement.src = "https://rawgit.com/ChaosKai/fahrzeugtableau/master/module/export.js";
-            scriptElement.src = "https://tableau.eagledev.de/lss-bridge/export.js";
+            scriptElement.src = "https://tableau.eagledev.de/userscript/export.js";
             document.body.appendChild(scriptElement);
 
 //          -
@@ -41,8 +39,16 @@
 
             var scriptElement = document.createElement("script");
             scriptElement.type = "text/javascript";
-            //scriptElement.src = "https://rawgit.com/ChaosKai/fahrzeugtableau/master/module/update.js";
-            scriptElement.src = "https://tableau.eagledev.de/lss-bridge/update.js";
+            scriptElement.src = "https://tableau.eagledev.de/userscript/update.js";
             document.body.appendChild(scriptElement);
+
+//          -
+//          -           Load Style
+//          -
+
+            var styleElement = document.createElement("style");
+            styleElement.type = "text/css";
+            styleElement.src = "https://tableau.eagledev.de/userscript/interface.css";
+            document.body.appendChild(styleElement);
             
         }
