@@ -180,7 +180,7 @@ function exportBuildings()
             }
             else
             {
-                console.log(resultData);
+                console.log(Response);
             }
         },
         error: function(errorData) {
@@ -230,7 +230,7 @@ function exportVehicles()
             }
             else
             {
-                console.log(resultData);
+                console.log(Response);
             }
         },
         error: function(errorData) {
