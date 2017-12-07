@@ -46,9 +46,11 @@
 //          -           Load Style
 //          -
 
-            var styleElement = document.createElement("style");
+            var styleElement = document.createElement("link");
+            styleElement.rel = "stylesheet";
             styleElement.type = "text/css";
-            styleElement.src = "https://tableau.eagledev.de/userscript/interface.css";
+            styleElement.media = "screen";
+            styleElement.href = "https://tableau.eagledev.de/userscript/interface.css";
             document.body.appendChild(styleElement);
             
         }
