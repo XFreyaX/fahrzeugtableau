@@ -172,7 +172,14 @@ function exportBuildings()
             'buildings': buildingExportList
         },
         success: function(resultData) {
-            setTimeout( exportBuildings, 500 );
+            if( resultData.statud == "success" )
+            {
+                setTimeout( exportBuildings, 500 );
+            }
+            else
+            {
+                console.log(resultData);
+            }
         },
         error: function(errorData) {
             // log errors
@@ -213,7 +220,14 @@ function exportVehicles()
             'vehicles': vehicleExportList
         },
         success: function(resultData) {
-            setTimeout( exportVehicles, 500 );
+            if( resultData.statud == "success" )
+            {
+                setTimeout( exportVehicles, 500 );
+            }
+            else
+            {
+                console.log(resultData);
+            }
         },
         error: function(errorData) {
             // log errors
