@@ -172,7 +172,9 @@ function exportBuildings()
             'buildings': buildingExportList
         },
         success: function(resultData) {
-            if( resultData.statud == "success" )
+            var Response = JSON.parse(resultData);
+            
+            if( Response.statud == "success" )
             {
                 setTimeout( exportBuildings, 500 );
             }
@@ -220,7 +222,9 @@ function exportVehicles()
             'vehicles': vehicleExportList
         },
         success: function(resultData) {
-            if( resultData.statud == "success" )
+            var Response = JSON.parse(resultData);
+            
+            if( Response.statud == "success" )
             {
                 setTimeout( exportVehicles, 500 );
             }
