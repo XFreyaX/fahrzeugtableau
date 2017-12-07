@@ -171,10 +171,10 @@ function exportBuildings()
             'user-id': user_id,
             'buildings': buildingExportList
         },
-        success: function(resultData) {
-            var Response = JSON.parse(resultData);
+        success: function(Response) {
+            //var Response = JSON.parse(Response);
             
-            if( Response.statud == "success" )
+            if( Response.status == "success" )
             {
                 setTimeout( exportBuildings, 500 );
             }
@@ -221,10 +221,10 @@ function exportVehicles()
             'user-id': user_id,
             'vehicles': vehicleExportList
         },
-        success: function(resultData) {
-            var Response = JSON.parse(resultData);
+        success: function(Response) {
+            //var Response = JSON.parse(Response);
             
-            if( Response.statud == "success" )
+            if( Response.status == "success" )
             {
                 setTimeout( exportVehicles, 500 );
             }
