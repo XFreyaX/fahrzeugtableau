@@ -172,7 +172,7 @@ function exportBuildings()
             'buildings': buildingExportList
         },
         success: function(Response) {
-            //var Response = JSON.parse(Response);
+            var Response = JSON.parse(Response);
             
             if( Response.status == "success" )
             {
@@ -222,7 +222,7 @@ function exportVehicles()
             'vehicles': vehicleExportList
         },
         success: function(Response) {
-            //var Response = JSON.parse(Response);
+            var Response = JSON.parse(Response);
             
             if( Response.status == "success" )
             {
