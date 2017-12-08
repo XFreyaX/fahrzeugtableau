@@ -16,6 +16,14 @@
         else
         {
 //          -
+//          -           Google Font
+//          -
+
+            var styleElement = document.createElement("link");
+            styleElement.rel = "stylesheet";
+            styleElement.href = "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700";
+            document.body.appendChild(styleElement);
+//          -
 //          -           UI-Creator
 //          -
 
