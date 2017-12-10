@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name        Fahrzeugtableau
+// @name        Fahrzeugtableau (BETA Channel)
 // @namespace   Leitstellenspiel
 // @description Export der Wachen & Fahrzeuge aus dem LSS zum Fahrzeugtableau
 // @downloadURL https://github.com/ChaosKai/fahrzeugtableau/raw/beta/tableau.user.js
