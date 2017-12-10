@@ -4,7 +4,7 @@
 // @description Export der Wachen & Fahrzeuge aus dem LSS zum Fahrzeugtableau
 // @downloadURL https://github.com/ChaosKai/fahrzeugtableau/raw/beta/tableau.user.js
 // @include     http*://www.leitstellenspiel.de/*
-// @version     2017-12-10-1856
+// @version     2017-12-10-1926
 // @author      Eagle, ChaosKai93, lost
 // @grant       none
 // ==/UserScript==
