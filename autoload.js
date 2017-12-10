@@ -62,5 +62,29 @@
             styleElement.media = "screen";
             styleElement.href = TableauUrl + "userscript/interface.css";
             document.body.appendChild(styleElement);
+
+//          -
+//          -           Export Settings
+//          -
             
+            var AllowedBuildings = {
+                0: true,    // Feuerwache
+                1: false,   // Feuerwehrschule
+                2: true,    // Rettungswache
+                3: false,   // Rettungsschule
+                4: false,   // Krankenhaus
+                5: true,    // Rettungshubschrauberstation
+                6: true,    // Polizeiwache
+                8: false,   // Polizeischule
+                9: true,    // THW
+                10: false,  // THW Schule
+                11: true,   // Bereitschaftspolizei
+                12: true,   // SEG
+                13: true,   // Polizeihubschrauberstation
+                14: false,  // Bereitstellungsraum
+                15: true    // Wasserrettung
+            };
+            
+            var MaxBuildingsPerRequest = 20;
+            var MaxVehiclesPerRequest  = 20;
         }
