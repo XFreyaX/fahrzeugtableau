@@ -15,6 +15,8 @@
         }
         else
         {
+            var TableauUrl = "https://tableau.eagledev.de/";
+            
 //          -
 //          -           Google Font
 //          -
@@ -29,7 +31,7 @@
 
             var scriptElement = document.createElement("script");
             scriptElement.type = "text/javascript";
-            scriptElement.src = "https://tableau.eagledev.de/userscript/interface.js";
+            scriptElement.src = TableauUrl + "userscript/interface.js";
             document.body.appendChild(scriptElement);
 
 //          -
@@ -38,7 +40,7 @@
 
             var scriptElement = document.createElement("script");
             scriptElement.type = "text/javascript";
-            scriptElement.src = "https://tableau.eagledev.de/userscript/export.js";
+            scriptElement.src = TableauUrl + "userscript/export.js";
             document.body.appendChild(scriptElement);
 
 //          -
@@ -47,7 +49,7 @@
 
             var scriptElement = document.createElement("script");
             scriptElement.type = "text/javascript";
-            scriptElement.src = "https://tableau.eagledev.de/userscript/update.js";
+            scriptElement.src = TableauUrl + "userscript/update.js";
             document.body.appendChild(scriptElement);
 
 //          -
@@ -58,7 +60,7 @@
             styleElement.rel = "stylesheet";
             styleElement.type = "text/css";
             styleElement.media = "screen";
-            styleElement.href = "https://tableau.eagledev.de/userscript/interface.css";
+            styleElement.href = TableauUrl + "userscript/interface.css";
             document.body.appendChild(styleElement);
             
         }
