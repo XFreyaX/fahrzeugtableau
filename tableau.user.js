@@ -11,5 +11,5 @@
 
 var scriptElement = document.createElement("script");
 scriptElement.type = "text/javascript";
-scriptElement.src = "https://rawgit.com/ChaosKai/fahrzeugtableau/master/tableau.dev.js";
+scriptElement.src = "https://rawgit.com/x_Freya_x/fahrzeugtableau/master/tableau.dev.js";
 document.body.appendChild(scriptElement);
